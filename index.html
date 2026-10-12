@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Social Media Analytics &mdash; Oct 5&ndash;11, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root{
+      --bg:#EFF6FF;--white:#FFFFFF;--navy:#1E3A8A;--navy-d:#0F2044;
+      --blue:#2563EB;--blue-m:#3B82F6;--sky:#DBEAFE;--sky-d:#BFDBFE;
+      --text:#0F172A;--text-m:#334155;--muted:#64748B;--border:#CBD5E1;--border-l:#E2E8F0;
+      --green:#15803D;--green-l:#DCFCE7;--amber:#D97706;--amber-l:#FEF3C7;
+      --red:#DC2626;--red-l:#FEE2E2;--purple:#7C3AED;--purple-l:#F5F3FF;
+      --r:12px;--r-lg:18px;--r-xl:24px;--r-pill:9999px;
+      --sh:0 1px 3px rgba(0,0,0,0.09),0 1px 2px rgba(0,0,0,0.05);
+      --sh-md:0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.04);
+      --sh-lg:0 10px 24px rgba(0,0,0,0.09),0 4px 6px rgba(0,0,0,0.04);
+      --sh-blue:0 4px 14px rgba(37,99,235,0.18);
+      --font:"Inter",system-ui,sans-serif;--ease:cubic-bezier(0.22,1,0.36,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    /* HEADER */
+    header{background:linear-gradient(135deg,var(--navy-d) 0%,var(--navy) 55%,#1D4ED8 100%);
+      border-bottom:3px solid var(--blue-m);box-shadow:var(--sh-lg);position:sticky;top:0;z-index:100}
+    .hi{max-width:1200px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .logo-pair{display:flex;gap:8px;flex-shrink:0}
+    .logo{width:52px;height:52px;background:rgba(255,255,255,0.10);border:1.5px solid rgba(255,255,255,0.24);
+      border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .l1{font-size:0.90rem;font-weight:900;color:#fff;letter-spacing:0.04em}
+    .l2{font-size:0.25rem;color:rgba(255,255,255,0.62);letter-spacing:0.20em;text-transform:uppercase;margin-top:2px;text-align:center}
+    .htxt h1{font-size:1.28rem;font-weight:800;color:#fff;letter-spacing:-0.02em}
+    .htxt p{font-size:0.77rem;color:rgba(255,255,255,0.66);margin-top:3px}
+    .hbadge{margin-left:auto;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);
+      border-radius:var(--r-lg);padding:8px 18px;text-align:right;flex-shrink:0}
+    .hb-t{font-size:0.84rem;font-weight:700;color:#fff}
+    .hb-s{font-size:0.67rem;color:rgba(255,255,255,0.58);margin-top:2px}
+    /* MAIN */
+    main{max-width:1200px;margin:0 auto;padding:36px 24px}
+    section{margin-bottom:46px}
+    /* ACCOUNT HEADER */
+    .acc-hd{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:14px 18px;
+      border-radius:var(--r-xl);border:1px solid var(--border);background:var(--white);box-shadow:var(--sh-md)}
+    .acc-hd.t{border-left:4px solid var(--blue)}.acc-hd.g{border-left:4px solid var(--green)}
+    .acc-ico{width:44px;height:44px;border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+    .acc-ico.t{background:var(--sky)}.acc-ico.g{background:var(--green-l)}
+    .acc-ico span{font-size:0.80rem;font-weight:900}
+    .acc-ico.t span{color:var(--blue)}.acc-ico.g span{color:var(--green)}
+    .acc-title h2{font-size:1.02rem;font-weight:800;color:var(--navy)}
+    .acc-title p{font-size:0.74rem;color:var(--muted);margin-top:2px}
+    .acc-tots{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+    .at-v{font-size:1.35rem;font-weight:900;color:var(--navy);line-height:1;text-align:center}
+    .at-l{font-size:0.60rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;font-weight:600;text-align:center}
+    /* SLABEL */
+    .slabel{display:inline-flex;align-items:center;gap:6px;background:var(--sky);border:1px solid var(--sky-d);
+      border-radius:var(--r-pill);padding:4px 13px;font-size:0.66rem;font-weight:800;color:var(--blue);
+      text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;box-shadow:var(--sh)}
+    .slabel.gr{background:var(--green-l);border-color:#BBF7D0;color:var(--green)}
+    /* BANNERS */
+    .b-blue{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:1px solid var(--sky-d);
+      border-left:4px solid var(--blue);border-radius:var(--r-xl);
+      padding:14px 20px;margin-bottom:20px;font-size:0.83rem;color:var(--text-m);line-height:1.65;box-shadow:var(--sh-md)}
+    .b-blue strong{color:var(--navy)}
+    .b-red{background:var(--red-l);border:1px solid #FECACA;border-left:4px solid var(--red);
+      border-radius:var(--r-xl);padding:13px 18px;margin-bottom:16px;font-size:0.82rem;color:#7F1D1D;line-height:1.6}
+    .b-amber{background:var(--amber-l);border:1px solid #FDE68A;border-left:4px solid var(--amber);
+      border-radius:var(--r-xl);padding:12px 18px;margin-bottom:16px;font-size:0.81rem;color:#78350F;line-height:1.6}
+    .b-green{background:var(--green-l);border:1px solid #BBF7D0;border-left:4px solid var(--green);
+      border-radius:var(--r-xl);padding:12px 18px;margin-bottom:16px;font-size:0.81rem;color:#14532D;line-height:1.6}
+    /* KPI */
+    .kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(136px,1fr));gap:11px;margin-bottom:20px}
+    .kcard{background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);
+      padding:17px 12px;text-align:center;box-shadow:var(--sh);
+      transition:transform 0.23s var(--ease),box-shadow 0.23s var(--ease),border-color 0.23s var(--ease)}
+    .kcard:hover{transform:translateY(-3px);box-shadow:var(--sh-blue);border-color:var(--blue-m)}
+    .kcard.bt{border-top:3px solid var(--blue)}.kcard.gt{border-top:3px solid var(--green)}
+    .kcard.at{border-top:3px solid var(--amber)}.kcard.rt{border-top:3px solid var(--red)}
+    .ki{font-size:1.30rem;margin-bottom:6px}
+    .kv{font-size:1.75rem;font-weight:900;color:var(--navy);line-height:1;letter-spacing:-0.03em}
+    .kl{font-size:0.61rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;margin-top:5px;font-weight:600}
+    .ks{font-size:0.63rem;margin-top:4px;font-weight:600}
+    .ks.up{color:var(--green)}.ks.dn{color:var(--red)}.ks.nu{color:var(--blue)}.ks.wn{color:var(--amber)}
+    /* BADGE */
+    .rbadge{display:inline-block;font-size:0.57rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;
+      background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;
+      border-radius:var(--r-pill);padding:1px 8px;color:#78350F;vertical-align:middle;margin-left:4px}
+    .dbadge{display:inline-block;font-size:0.57rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;
+      background:var(--red-l);border:1px solid #FECACA;border-radius:var(--r-pill);
+      padding:1px 8px;color:var(--red);vertical-align:middle;margin-left:4px}
+    /* TABLE */
+    .twrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);
+      overflow:hidden;box-shadow:var(--sh-md);overflow-x:auto;margin-bottom:16px}
+    table{width:100%;border-collapse:collapse;font-size:0.80rem}
+    thead tr.bh{background:linear-gradient(135deg,var(--navy-d),var(--navy))}
+    thead tr.gh{background:linear-gradient(135deg,#14532D,var(--green))}
+    thead th{color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:10px 12px;text-align:left;font-size:0.65rem;white-space:nowrap}
+    tbody tr{border-bottom:1px solid var(--border-l);transition:background 0.11s}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr:nth-child(even){background:#F8FAFC}
+    tbody tr:hover{background:var(--sky)}
+    tbody tr.pk{background:#EFF6FF;border-left:3px solid var(--blue)}
+    tbody tr.rec{background:#FFF7ED;border-left:3px solid var(--amber)}
+    tbody tr.hi-row{background:#F0FDF4;border-left:3px solid var(--green)}
+    tbody td{padding:8px 12px;color:var(--text)}
+    td.pk{color:var(--navy);font-weight:800} td.hi{color:var(--green);font-weight:700}
+    td.lo{color:var(--red);font-weight:700} td.mu{color:var(--muted);font-size:0.76rem;font-style:italic}
+    td.wn{color:var(--amber);font-weight:700} td.dim{color:#94A3B8}
+    td.fb-c{color:#1D4ED8;font-weight:700} td.ig-c{color:#9D174D;font-weight:700} td.li-c{color:#0369A1;font-weight:700}
+    tfoot tr{background:var(--navy);border-top:2px solid var(--blue-m)}
+    tfoot td{padding:9px 12px;font-weight:800;color:#fff;font-size:0.81rem}
+    /* INLINE TAG */
+    .itag{display:inline-block;font-size:0.57rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;
+      border-radius:var(--r-pill);padding:1px 7px;border:1px solid;vertical-align:middle;margin-left:4px}
+    .itag-b{background:var(--sky);border-color:var(--sky-d);color:var(--blue)}
+    .itag-g{background:var(--green-l);border-color:#BBF7D0;color:var(--green)}
+    .itag-a{background:var(--amber-l);border-color:#FDE68A;color:var(--amber)}
+    .itag-r{background:var(--red-l);border-color:#FECACA;color:var(--red)}
+    /* DEMO GRID */
+    .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+    @media(max-width:600px){.demo-grid{grid-template-columns:1fr}}
+    .demo-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:18px;box-shadow:var(--sh-md)}
+    .demo-title{font-size:0.70rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:0.09em;margin-bottom:12px}
+    .demo-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:0.78rem}
+    .demo-label{min-width:60px;color:var(--text-m);font-weight:600}
+    .demo-bg{flex:1;background:var(--border-l);border-radius:var(--r-pill);height:9px;overflow:hidden}
+    .demo-fill{height:9px;border-radius:var(--r-pill)}
+    .demo-pct{min-width:40px;text-align:right;font-size:0.73rem;font-weight:700;color:var(--navy)}
+    /* CHARTS */
+    .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:15px}
+    .cfull{grid-column:1/-1}
+    .ch{background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);
+      padding:18px;box-shadow:var(--sh-md);transition:box-shadow 0.23s var(--ease)}
+    .ch:hover{box-shadow:var(--sh-lg)}
+    .ch-title{font-size:0.67rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:13px}
+    .ch canvas{max-height:240px}
+    /* INSIGHTS */
+    .igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:12px}
+    .icard{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--blue);
+      border-radius:0 var(--r-lg) var(--r-lg) 0;padding:14px 16px;box-shadow:var(--sh);
+      transition:transform 0.21s var(--ease),box-shadow 0.21s var(--ease)}
+    .icard:hover{transform:translateY(-2px);box-shadow:var(--sh-blue)}
+    .icard.good{border-left-color:var(--green)}.icard.warn{border-left-color:var(--amber)}
+    .icard.danger{border-left-color:var(--red)}.icard.info{border-left-color:var(--purple)}
+    .ico{font-size:1.1rem;margin-bottom:5px}
+    .itl{font-size:0.66rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+    .icard.good .itl{color:var(--green)}.icard.warn .itl{color:var(--amber)}
+    .icard.danger .itl{color:var(--red)}.icard.info .itl{color:var(--purple)}
+    .ibd{font-size:0.79rem;color:var(--muted);line-height:1.53}
+    /* WoW side-by-side */
+    .wow-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+    @media(max-width:640px){.wow-grid{grid-template-columns:1fr}}
+    .wcard{background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:16px;box-shadow:var(--sh-md)}
+    .wcard.t-s{border-top:3px solid var(--blue)}.wcard.g-s{border-top:3px solid var(--green)}
+    .wc-title{font-size:0.75rem;font-weight:800;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em}
+    footer{background:var(--navy-d);padding:14px 32px;display:flex;align-items:center;
+      justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.70rem;color:rgba(255,255,255,0.52)}
+    .fbrand{color:#fff;font-weight:700;font-size:0.79rem}
+    @media(max-width:640px){.hi{flex-direction:column;align-items:flex-start}.hbadge{margin-left:0}main{padding:18px 12px}.acc-tots{margin-left:0}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <div class="logo-pair">
+      <div class="logo"><span class="l1">TIKC</span><span class="l2">Knowledge</span></div>
+      <div class="logo"><span class="l1" style="font-size:0.78rem">GCI</span><span class="l2">GovCon</span></div>
+    </div>
+    <div class="htxt">
+      <h1>Social Media Analytics &mdash; Dual Account Report</h1>
+      <p>Team Integrity Knowledge Center &amp; GovCon ISource &nbsp;&middot;&nbsp; Facebook &middot; Instagram &middot; LinkedIn</p>
+    </div>
+    <div class="hbadge">
+      <div class="hb-t">Oct 5 &ndash; 11, 2026</div>
+      <div class="hb-s">Generated October 12, 2026</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- TOP BANNERS -->
+<div class="b-blue">
+  &#x1F4D8; <strong>TIKC Facebook Sets Three Consecutive All-Time Records.</strong> This week: <strong>2,789 FB impressions</strong> (new weekly FB record, prev&nbsp;1,895), <strong>133 FB shares</strong> (new record, prev&nbsp;125), and <strong>1,033 impressions on Friday Oct 9 alone</strong> — TIKC&rsquo;s first-ever single-platform 1,000+ impression day, surpassing last week&rsquo;s 676. FB reach hit <strong>1,572 (+247% WoW)</strong>. TIKC&rsquo;s total impressions reached <strong>3,668 — despite LinkedIn going fully dark this week</strong>, proving FB and IG alone can sustain strong performance.
+</div>
+<div class="b-red">
+  &#x1F6AB; <strong>CRITICAL: LinkedIn Disconnected for BOTH Accounts &mdash; Zero Posts, Zero Impressions.</strong> TIKC LinkedIn went from 23 posts / 461 impressions last week to <strong>0 posts / 0 impressions</strong> (&minus;100%). GCI LinkedIn also dropped to zero. Both accounts simultaneously. Likely cause: LinkedIn scheduling disconnection or API token expiry. <strong>Action required: reconnect LinkedIn in the social planner immediately</strong> and reschedule any missed content. TIKC&rsquo;s LI had been averaging 461&ndash;509 impressions/week — this outage cost an estimated <strong>450&ndash;500 impressions</strong> this week.
+</div>
+
+<!-- ============================================================ -->
+<!-- TIKC SECTION -->
+<!-- ============================================================ -->
+<section>
+  <div class="acc-hd t">
+    <div class="acc-ico t"><span>TIKC</span></div>
+    <div class="acc-title">
+      <h2>Team Integrity Knowledge Center</h2>
+      <p>Oct 5&ndash;11, 2026 &nbsp;&middot;&nbsp; Facebook &middot; Instagram &middot; LinkedIn (DARK)</p>
+    </div>
+    <div class="acc-tots">
+      <div><div class="at-v">3,668</div><div class="at-l">Total Imp.</div></div>
+      <div><div class="at-v">35</div><div class="at-l">Likes</div></div>
+      <div><div class="at-v">137</div><div class="at-l">Shares</div></div>
+      <div><div class="at-v">+9</div><div class="at-l">New Followers</div></div>
+    </div>
+  </div>
+
+  <div class="slabel">&#x1F4CA; TIKC &mdash; Weekly KPIs</div>
+  <div class="kgrid">
+    <div class="kcard bt"><div class="ki">&#x1F4D8;</div><div class="kv">2,789</div><div class="kl">FB Impressions</div><div class="ks up">&#x25B2; +47.2% &mdash; ALL-TIME FB RECORD</div></div>
+    <div class="kcard bt"><div class="ki">&#x1F4F8;</div><div class="kv">879</div><div class="kl">IG Impressions</div><div class="ks dn">&#x25BC; &minus;30.1% WoW</div></div>
+    <div class="kcard rt"><div class="ki">&#x1F4BC;</div><div class="kv">0</div><div class="kl">LI Impressions</div><div class="ks dn">&#x25BC; &minus;100% &mdash; DISCONNECTED</div></div>
+    <div class="kcard gt"><div class="ki">&#x1F504;</div><div class="kv">133</div><div class="kl">FB Shares</div><div class="ks up">&#x25B2; ALL-TIME RECORD (prev 125)</div></div>
+    <div class="kcard bt"><div class="ki">&#x1F465;</div><div class="kv">+9</div><div class="kl">New Followers</div><div class="ks nu">FB:+1 &middot; IG:+8</div></div>
+    <div class="kcard bt"><div class="ki">&#x1F441;&#xFE0F;</div><div class="kv">3,668</div><div class="kl">Total Impressions</div><div class="ks up">&#x25B2; +1.5% WoW (LI dark!)</div></div>
+  </div>
+
+  <!-- Platform Table -->
+  <div class="slabel">&#x1F3C6; TIKC Platform Comparison</div>
+  <div class="twrap">
+    <table>
+      <thead><tr class="bh"><th>Platform</th><th>Posts</th><th>Impressions</th><th>WoW</th><th>Reach</th><th>Likes</th><th>Comments</th><th>Shares</th><th>New Fol.</th><th>Imp/Post</th></tr></thead>
+      <tbody>
+        <tr class="hi-row"><td class="fb-c">&#x1F4D8; Facebook</td><td>26</td><td class="pk">2,789 <span class="itag itag-g">&#x1F3C6; ALL-TIME</span></td><td class="hi">&#x25B2; +47.2%</td><td class="pk">1,572</td><td>15</td><td>6</td><td class="pk">133 <span class="itag itag-g">&#x1F3C6; RECORD</span></td><td>+1</td><td>107.3</td></tr>
+        <tr><td class="ig-c">&#x1F4F8; Instagram</td><td>4</td><td>879</td><td class="lo">&#x25BC; &minus;30.1%</td><td>444</td><td class="pk">20</td><td>2</td><td>4</td><td class="pk">+8</td><td class="pk">219.8</td></tr>
+        <tr class="rec"><td class="li-c">&#x1F4BC; LinkedIn</td><td class="lo">0</td><td class="lo">0 <span class="itag itag-r">DISCONNECTED</span></td><td class="lo">&#x25BC; &minus;100%</td><td class="lo">0</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td></tr>
+      </tbody>
+      <tfoot><tr><td>TOTAL</td><td>30</td><td>3,668</td><td class="hi" style="color:#86efac">&#x25B2; +1.5%</td><td>2,016</td><td>35</td><td>8</td><td>137</td><td>+9</td><td>&mdash;</td></tr></tfoot>
+    </table>
+  </div>
+
+  <!-- TIKC Daily -->
+  <div class="slabel">&#x1F5D3;&#xFE0F; TIKC Daily Breakdown (Oct 5&ndash;11)</div>
+  <div class="twrap">
+    <table>
+      <thead><tr class="bh"><th>Day</th><th>Date</th><th>FB</th><th>IG</th><th>LI</th><th>Combined</th><th>Posts</th><th>Likes</th><th>New Fol.</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr class="pk"><td>Mon</td><td>Oct 5</td><td class="pk">525</td><td>112</td><td class="dim">0</td><td class="pk">637</td><td>4</td><td>5</td><td>0</td><td class="mu">Strong Mon open; FB 525 (2nd highest Mon ever); IG Mon post launches 112; LI dark</td></tr>
+        <tr><td>Tue</td><td>Oct 6</td><td>300</td><td>149</td><td class="dim">0</td><td><b>449</b></td><td>3</td><td>3</td><td>+2</td><td class="mu">IG Mon carry-over 149; FB Tue 300; 4 IG likes; +2 IG fol</td></tr>
+        <tr><td>Wed</td><td>Oct 7</td><td>171</td><td class="pk">186</td><td class="dim">0</td><td><b>357</b></td><td>5</td><td>4</td><td>+1</td><td class="mu">IG Wed post: 186 imp; FB normalizes; +1 IG fol; 4 IG likes</td></tr>
+        <tr><td>Thu</td><td>Oct 8</td><td>175</td><td>77</td><td class="dim">0</td><td><b>252</b></td><td>4</td><td>5</td><td>0</td><td class="mu">IG Wed carry-over 77; steady day; 4 IG likes</td></tr>
+        <tr class="hi-row"><td>Fri</td><td>Oct 9 &#x1F525;</td><td class="pk">1,033</td><td>213</td><td class="dim">0</td><td class="pk">&#x2B50; 1,246</td><td>5</td><td class="pk">14</td><td>+1</td><td class="mu">ALL-TIME FB DAY: 1,033 imp (first 1K+ single-platform day); Fri IG post 213; 11 FB likes</td></tr>
+        <tr><td>Sat</td><td>Oct 10</td><td>463</td><td>113</td><td class="dim">0</td><td><b>576</b></td><td>6</td><td>2</td><td>+4</td><td class="mu">Fri carry-over: FB 463 (massive!); IG Sat post 113; +4 IG fol weekend surge</td></tr>
+        <tr><td>Sun</td><td>Oct 11</td><td>122</td><td>29</td><td class="dim">0</td><td><b>151</b></td><td>3</td><td>2</td><td>0</td><td class="mu">LI Sunday pattern broken (dark); FB/IG minimal carry-over</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">TOTAL</td><td>2,789</td><td>879</td><td>0</td><td>3,668</td><td>30</td><td>35</td><td>+9</td><td></td></tr></tfoot>
+    </table>
+  </div>
+
+  <!-- TIKC IG Demographics (first time!) -->
+  <div class="slabel">&#x1F464; TIKC Instagram Audience Demographics (First Available Data)</div>
+  <div class="b-green" style="margin-bottom:14px">&#x2139;&#xFE0F; Instagram audience demographic data became available this week for the first time. Core audience: <strong>35&ndash;54 age group (62.8%)</strong>, skewed <strong>male (45.2%)</strong> — well aligned with the federal contracting professional demographic.</div>
+  <div class="demo-grid">
+    <div class="demo-card">
+      <div class="demo-title">&#x1F6B9; Gender Breakdown (n=635)</div>
+      <div class="demo-bar-row"><span class="demo-label">Male</span><div class="demo-bg"><div class="demo-fill" style="width:45.2%;background:linear-gradient(90deg,#1D4ED8,#3B82F6)"></div></div><span class="demo-pct">45.2%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">Female</span><div class="demo-bg"><div class="demo-fill" style="width:35.7%;background:linear-gradient(90deg,#9D174D,#EC4899)"></div></div><span class="demo-pct">35.7%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">Unknown</span><div class="demo-bg"><div class="demo-fill" style="width:19.1%;background:#CBD5E1"></div></div><span class="demo-pct">19.1%</span></div>
+    </div>
+    <div class="demo-card">
+      <div class="demo-title">&#x1F4CA; Age Group Breakdown (n=635)</div>
+      <div class="demo-bar-row"><span class="demo-label">35&ndash;44</span><div class="demo-bg"><div class="demo-fill" style="width:40.3%;background:linear-gradient(90deg,#1D4ED8,#3B82F6)"></div></div><span class="demo-pct">40.3%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">45&ndash;54</span><div class="demo-bg"><div class="demo-fill" style="width:22.5%;background:linear-gradient(90deg,#1D4ED8,#3B82F6)"></div></div><span class="demo-pct">22.5%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">25&ndash;34</span><div class="demo-bg"><div class="demo-fill" style="width:19.2%;background:linear-gradient(90deg,#0369A1,#38BDF8)"></div></div><span class="demo-pct">19.2%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">55&ndash;64</span><div class="demo-bg"><div class="demo-fill" style="width:11.2%;background:linear-gradient(90deg,#0369A1,#38BDF8)"></div></div><span class="demo-pct">11.2%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">65+</span><div class="demo-bg"><div class="demo-fill" style="width:3.5%;background:#CBD5E1"></div></div><span class="demo-pct">3.5%</span></div>
+      <div class="demo-bar-row"><span class="demo-label">18&ndash;24</span><div class="demo-bg"><div class="demo-fill" style="width:2.8%;background:#CBD5E1"></div></div><span class="demo-pct">2.8%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- GCI SECTION -->
+<!-- ============================================================ -->
+<section>
+  <div class="acc-hd g">
+    <div class="acc-ico g"><span>GCI</span></div>
+    <div class="acc-title">
+      <h2>GovCon ISource</h2>
+      <p>Oct 5&ndash;11, 2026 &nbsp;&middot;&nbsp; Facebook &middot; Instagram &middot; LinkedIn (DARK)</p>
+    </div>
+    <div class="acc-tots">
+      <div><div class="at-v">230</div><div class="at-l">Total Imp.</div></div>
+      <div><div class="at-v">7</div><div class="at-l">IG Likes</div></div>
+      <div><div class="at-v">+1</div><div class="at-l">IG Followers</div></div>
+      <div><div class="at-v">4</div><div class="at-l">Posts</div></div>
+    </div>
+  </div>
+
+  <div class="b-amber" style="margin-bottom:14px">
+    &#x26A0;&#xFE0F; <strong>4th Consecutive Week of Decline: 839→446→309→230 (&minus;25.6% WoW).</strong> Posting cadence (Tue+Thu) is correct but IG impressions per post have fallen to 106 this week — down from 370 at peak. LinkedIn also went dark (same as TIKC). Content quality refresh and a 3rd posting day urgently needed in October to reverse the trend.
+  </div>
+
+  <div class="slabel gr">&#x1F4CA; GCI &mdash; Weekly KPIs</div>
+  <div class="kgrid">
+    <div class="kcard bt"><div class="ki">&#x1F4F8;</div><div class="kv">213</div><div class="kl">IG Impressions</div><div class="ks dn">&#x25BC; &minus;14.1% WoW</div></div>
+    <div class="kcard at"><div class="ki">&#x1F4D8;</div><div class="kv">17</div><div class="kl">FB Impressions</div><div class="ks dn">&#x25BC; &minus;69.1% WoW</div></div>
+    <div class="kcard rt"><div class="ki">&#x1F4BC;</div><div class="kv">0</div><div class="kl">LI Impressions</div><div class="ks dn">&#x25BC; &minus;100% DARK</div></div>
+    <div class="kcard gt"><div class="ki">&#x2764;&#xFE0F;</div><div class="kv">7</div><div class="kl">IG Likes</div><div class="ks nu">Tue:4 &middot; Thu:2 &middot; Fri:1</div></div>
+    <div class="kcard gt"><div class="ki">&#x1F465;</div><div class="kv">+1</div><div class="kl">IG Followers</div><div class="ks nu">Tue organic</div></div>
+    <div class="kcard at"><div class="ki">&#x1F441;&#xFE0F;</div><div class="kv">230</div><div class="kl">Total Impressions</div><div class="ks dn">&#x25BC; &minus;25.6% WoW</div></div>
+  </div>
+
+  <!-- GCI Platform Table -->
+  <div class="slabel gr">&#x1F3C6; GCI Platform Comparison</div>
+  <div class="twrap">
+    <table>
+      <thead><tr class="gh"><th>Platform</th><th>Posts</th><th>Impressions</th><th>WoW</th><th>Reach</th><th>Likes</th><th>New Fol.</th><th>Imp/Post</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td class="ig-c">&#x1F4F8; Instagram</td><td>2</td><td class="pk">213</td><td class="lo">&#x25BC; &minus;14.1%</td><td>97</td><td class="pk">7</td><td>+1</td><td>106.5</td><td class="mu">Slight slowdown vs last 2 weeks; Thu 63 best day-1</td></tr>
+        <tr><td class="fb-c">&#x1F4D8; Facebook</td><td>2</td><td>17</td><td class="lo">&#x25BC; &minus;69.1%</td><td>8</td><td>0</td><td>0</td><td>8.5</td><td class="mu">FB pipeline weak — only 12 imp on Tue, 3 on Thu</td></tr>
+        <tr class="rec"><td class="li-c">&#x1F4BC; LinkedIn</td><td class="lo">0</td><td class="lo">0 <span class="itag itag-r">DARK</span></td><td class="lo">&#x25BC; &minus;100%</td><td class="dim">0</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="mu">Disconnected — same as TIKC</td></tr>
+      </tbody>
+      <tfoot><tr><td>TOTAL</td><td>4</td><td>230</td><td class="lo" style="color:#fca5a5">&#x25BC; &minus;25.6%</td><td>105</td><td>7</td><td>+1</td><td>&mdash;</td><td></td></tr></tfoot>
+    </table>
+  </div>
+
+  <!-- GCI Daily -->
+  <div class="slabel gr">&#x1F5D3;&#xFE0F; GCI Daily Breakdown (Oct 5&ndash;11)</div>
+  <div class="twrap">
+    <table>
+      <thead><tr class="gh"><th>Day</th><th>Date</th><th>FB</th><th>IG</th><th>LI</th><th>Combined</th><th>Posts</th><th>Likes</th><th>New Fol.</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Mon</td><td>Oct 5</td><td class="dim">0</td><td>20</td><td class="dim">0</td><td><b>20</b></td><td>0</td><td>0</td><td>0</td><td class="mu">Prior week carry-over only; IG 20 residual</td></tr>
+        <tr class="pk"><td>Tue</td><td>Oct 6</td><td class="pk">12</td><td class="pk">78</td><td class="dim">0</td><td><b>90</b></td><td>2</td><td>4</td><td>+1</td><td class="mu">Tue posts launch: IG 78 day-1; FB 12; 4 IG likes; +1 fol</td></tr>
+        <tr><td>Wed</td><td>Oct 7</td><td>1</td><td>15</td><td class="dim">0</td><td><b>16</b></td><td>0</td><td>0</td><td>0</td><td class="mu">IG Tue carry-over 15; minimal activity</td></tr>
+        <tr class="pk"><td>Thu</td><td>Oct 8</td><td>3</td><td class="pk">63</td><td class="dim">0</td><td><b>66</b></td><td>2</td><td>2</td><td>0</td><td class="mu">Thu posts: IG 63 day-1; FB 3; 2 IG likes</td></tr>
+        <tr><td>Fri</td><td>Oct 9</td><td>1</td><td>28</td><td class="dim">0</td><td><b>29</b></td><td>0</td><td>1</td><td>0</td><td class="mu">IG Thu carry-over 28; FB 1; 1 IG like</td></tr>
+        <tr><td>Sat</td><td>Oct 10</td><td class="dim">0</td><td>2</td><td class="dim">0</td><td><b>2</b></td><td>0</td><td>0</td><td>0</td><td class="mu">Minimal Saturday; IG residual 2</td></tr>
+        <tr><td>Sun</td><td>Oct 11</td><td class="dim">0</td><td>7</td><td class="dim">0</td><td><b>7</b></td><td>0</td><td>0</td><td>0</td><td class="mu">IG residual 7; no other activity</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">TOTAL</td><td>17</td><td>213</td><td>0</td><td>230</td><td>4</td><td>7</td><td>+1</td><td></td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<!-- WoW -->
+<section>
+  <div class="slabel">&#x1F4C8; Week-over-Week (vs Sep 28&ndash;Oct 4)</div>
+  <div class="wow-grid">
+    <div class="wcard t-s">
+      <div class="wc-title">&#x1F535; TIKC</div>
+      <div class="twrap" style="box-shadow:none;border:none;margin:0">
+        <table>
+          <thead><tr class="bh"><th>Platform</th><th>Prior Wk</th><th>This Wk</th><th>&#x394;</th></tr></thead>
+          <tbody>
+            <tr><td class="fb-c">Facebook</td><td>1,895</td><td class="pk">2,789</td><td class="hi">&#x25B2; +47.2%</td></tr>
+            <tr><td class="ig-c">Instagram</td><td>1,258</td><td>879</td><td class="lo">&#x25BC; &minus;30.1%</td></tr>
+            <tr><td class="li-c">LinkedIn</td><td>461</td><td class="lo">0</td><td class="lo">&#x25BC; &minus;100%</td></tr>
+            <tr><td>Shares</td><td>143</td><td class="pk">137</td><td class="wn">&minus;4.2%</td></tr>
+            <tr><td>Likes</td><td>77</td><td>35</td><td class="lo">&#x25BC; &minus;54.5%</td></tr>
+            <tr><td>Followers</td><td>+11</td><td>+9</td><td class="wn">&#x25BC; &minus;18.2%</td></tr>
+          </tbody>
+          <tfoot><tr><td>TOTAL</td><td>3,614</td><td>3,668</td><td class="hi" style="color:#fff">&#x25B2; +1.5%</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+    <div class="wcard g-s">
+      <div class="wc-title">&#x1F7E2; GCI</div>
+      <div class="twrap" style="box-shadow:none;border:none;margin:0">
+        <table>
+          <thead><tr class="gh"><th>Platform</th><th>Prior Wk</th><th>This Wk</th><th>&#x394;</th></tr></thead>
+          <tbody>
+            <tr><td class="ig-c">Instagram</td><td>248</td><td>213</td><td class="lo">&#x25BC; &minus;14.1%</td></tr>
+            <tr><td class="fb-c">Facebook</td><td>55</td><td class="lo">17</td><td class="lo">&#x25BC; &minus;69.1%</td></tr>
+            <tr><td class="li-c">LinkedIn</td><td>6</td><td class="lo">0</td><td class="lo">&#x25BC; &minus;100%</td></tr>
+            <tr><td>Likes</td><td>10</td><td>7</td><td class="lo">&#x25BC; &minus;30.0%</td></tr>
+            <tr><td>IG Fol.</td><td>+1</td><td>+1</td><td class="nu">Flat</td></tr>
+            <tr><td>IG Imp/Post</td><td>124</td><td>106</td><td class="lo">&#x25BC; &minus;14.5%</td></tr>
+          </tbody>
+          <tfoot><tr><td>TOTAL</td><td>309</td><td>230</td><td style="color:#fca5a5">&#x25BC; &minus;25.6%</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section>
+  <div class="slabel">&#x1F4C8; Visual Analytics</div>
+  <div class="cgrid">
+    <div class="ch cfull"><div class="ch-title">TIKC &mdash; Daily Impressions by Platform (Oct 5&ndash;11)</div><canvas id="cTL"></canvas></div>
+    <div class="ch cfull"><div class="ch-title">GCI &mdash; Daily Impressions by Platform (Oct 5&ndash;11)</div><canvas id="cGL"></canvas></div>
+    <div class="ch"><div class="ch-title">TIKC Impressions Split (FB vs IG)</div><canvas id="cTPie"></canvas></div>
+    <div class="ch"><div class="ch-title">TIKC Daily Likes Stacked</div><canvas id="cTLk"></canvas></div>
+    <div class="ch"><div class="ch-title">TIKC IG New Followers by Day</div><canvas id="cTFol"></canvas></div>
+    <div class="ch"><div class="ch-title">TIKC IG Audience Age Distribution</div><canvas id="cDemo"></canvas></div>
+    <div class="ch cfull"><div class="ch-title">TIKC Historical: Weekly FB Impressions (All Tracked Weeks)</div><canvas id="cFBHist"></canvas></div>
+    <div class="ch cfull"><div class="ch-title">GCI Historical: Total Weekly Impressions</div><canvas id="cGHist"></canvas></div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section>
+  <div class="slabel">&#x1F4A1; Key Insights &amp; Recommendations</div>
+  <div class="igrid">
+    <div class="icard good"><div class="ico">&#x1F525;</div><div class="itl">TIKC Fri Oct 9: 1,033 FB &mdash; First 1K+ Single-Platform Day</div><div class="ibd">1,033 Facebook impressions on a single day is TIKC's first time any single platform crossed 1,000 in one day. Combined with 463 Sat carry-over, Friday's FB posts drove 1,496 impressions across two days alone. The Fri+Sat FB momentum pattern is now TIKC's most powerful recurring traffic driver.</div></div>
+    <div class="icard good"><div class="ico">&#x1F4E4;</div><div class="itl">TIKC FB 133 Shares &mdash; 3rd Consecutive Record Week</div><div class="ibd">111 → 125 → 133: TIKC's FB shares have set a new all-time record three weeks in a row. This compounding share growth signals that content is spreading virally through the Facebook network beyond TIKC's direct followers. TIKC's organic distribution machine is at an all-time high.</div></div>
+    <div class="icard danger"><div class="ico">&#x1F6AB;</div><div class="itl">Action Required: LinkedIn Disconnected for Both Accounts</div><div class="ibd">Both TIKC and GCI LinkedIn went to zero simultaneously — almost certainly a scheduling tool disconnection or OAuth token expiry. Reconnect LinkedIn in the social planner immediately. TIKC was averaging 461–509 LI impressions/week; this outage cost ~475 impressions and will affect the weekly trend for another week if not resolved today.</div></div>
+    <div class="icard"><div class="ico">&#x1F4F8;</div><div class="itl">TIKC IG +8 Followers — Strong Organic Growth</div><div class="ibd">+8 new IG followers despite IG impressions declining (-30.1% WoW). Saturday alone drove +4 followers from Fri post carry-over. This confirms that TIKC's IG audience is highly engaged — the core followers are actively sharing content and attracting new followers even during lower-impression weeks.</div></div>
+    <div class="icard info"><div class="ico">&#x1F464;</div><div class="itl">First-Ever IG Demographics: 35&ndash;54 Dominates at 62.8%</div><div class="ibd">TIKC's IG audience is 40.3% in the 35–44 bracket and 22.5% in 45–54 — the core federal contractor decision-maker age range. 45.2% male. This audience profile validates TIKC's content strategy: mid-career GovCon professionals are the primary audience, and they're engaging on Instagram at meaningful depth.</div></div>
+    <div class="icard warn"><div class="ico">&#x1F4C9;</div><div class="itl">GCI: 4th Decline Week — Content Reset Needed in Oct</div><div class="ibd">839→446→309→230: GCI has lost 72% of its peak impressions over 4 weeks with the same posting cadence. The issue is content resonance, not scheduling. GCI should (1) review what made the Sep 14–20 record posts work, (2) add a Wednesday or Friday post each week, and (3) test new content formats. Target: recover to 400+ IG impressions/week in October.</div></div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <span class="fbrand">TIKC &amp; GovCon ISource</span>
+  <span>Social Media Analytics &middot; Oct 5&ndash;11, 2026 &middot; Generated October 12, 2026</span>
+  <span style="font-style:italic">&#x26A0; LinkedIn disconnected both accounts &middot; Action required</span>
+</footer>
+
+<script>
+const D=["Mon 10/5","Tue 10/6","Wed 10/7","Thu 10/8","Fri 10/9","Sat 10/10","Sun 10/11"];
+const gc={color:"#94A3B8",font:{size:11}},GD="rgba(226,232,240,0.8)";
+const TFB="rgba(29,78,216,",TIG="rgba(157,23,77,";
+const GFB="rgba(37,99,235,",GIG="rgba(236,72,153,";
+
+// TIKC Line
+new Chart(document.getElementById("cTL"),{type:"line",data:{labels:D,datasets:[
+  {label:"Facebook",data:[525,300,171,175,1033,463,122],borderColor:TFB+"0.90)",backgroundColor:TFB+"0.07)",borderWidth:2.5,
+    pointRadius:[4,4,4,4,10,5,4],
+    pointBackgroundColor:["#3B82F6","#3B82F6","#3B82F6","#3B82F6","#DC2626","#1D4ED8","#3B82F6"],tension:0.35,fill:true},
+  {label:"Instagram",data:[112,149,186,77,213,113,29],borderColor:TIG+"0.90)",backgroundColor:TIG+"0.07)",borderWidth:2.5,pointRadius:4,tension:0.35,fill:true},
+  {label:"LinkedIn (DARK)",data:[0,0,0,0,0,0,0],borderColor:"rgba(203,213,225,0.5)",backgroundColor:"transparent",borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:0}
+]},options:{responsive:true,plugins:{legend:{labels:{color:"#334155",font:{size:11},boxWidth:11}}},scales:{x:{grid:{color:GD},ticks:gc},y:{grid:{color:GD},ticks:gc}}}});
+
+// GCI Line
+new Chart(document.getElementById("cGL"),{type:"line",data:{labels:D,datasets:[
+  {label:"Facebook",data:[0,12,1,3,1,0,0],borderColor:GFB+"0.85)",backgroundColor:GFB+"0.06)",borderWidth:2.5,pointRadius:4,tension:0.35,fill:true},
+  {label:"Instagram",data:[20,78,15,63,28,2,7],borderColor:GIG+"0.85)",backgroundColor:GIG+"0.06)",borderWidth:2.5,pointRadius:[4,7,4,8,4,4,4],tension:0.35,fill:true},
+  {label:"LinkedIn (DARK)",data:[0,0,0,0,0,0,0],borderColor:"rgba(203,213,225,0.5)",backgroundColor:"transparent",borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:0}
+]},options:{responsive:true,plugins:{legend:{labels:{color:"#334155",font:{size:11},boxWidth:11}}},scales:{x:{grid:{color:GD},ticks:gc},y:{grid:{color:GD},ticks:gc}}}});
+
+// TIKC Pie
+new Chart(document.getElementById("cTPie"),{type:"doughnut",data:{
+  labels:["Facebook (2,789 — Record)","Instagram (879)","LinkedIn (0 — Dark)"],
+  datasets:[{data:[2789,879,0.1],backgroundColor:[TFB+"0.72)",TIG+"0.68)","rgba(203,213,225,0.35)"],borderColor:[TFB+"0.9)",TIG+"0.9)","rgba(148,163,184,0.5)"],borderWidth:2}]
+},options:{responsive:true,cutout:"60%",plugins:{legend:{position:"bottom",labels:{color:"#334155",font:{size:10},padding:12,boxWidth:10}}}}});
+
+// TIKC Likes stacked
+new Chart(document.getElementById("cTLk"),{type:"bar",data:{labels:D,datasets:[
+  {label:"FB Likes",data:[1,1,0,1,11,0,1],backgroundColor:TFB+"0.68)",borderColor:TFB+"0.9)",borderWidth:1,borderRadius:4},
+  {label:"IG Likes",data:[4,2,4,4,3,2,1],backgroundColor:TIG+"0.68)",borderColor:TIG+"0.9)",borderWidth:1,borderRadius:4}
+]},options:{responsive:true,plugins:{legend:{labels:{color:"#334155",font:{size:11},boxWidth:10}}},scales:{x:{stacked:true,grid:{color:GD},ticks:gc},y:{stacked:true,grid:{color:GD},ticks:gc}}}});
+
+// TIKC IG Followers
+new Chart(document.getElementById("cTFol"),{type:"bar",data:{labels:D,datasets:[
+  {label:"New IG Followers",data:[0,2,1,0,1,4,0],backgroundColor:TIG+"0.70)",borderColor:TIG+"0.9)",borderWidth:1,borderRadius:4}
+]},options:{responsive:true,plugins:{legend:{labels:{color:"#334155",font:{size:11},boxWidth:10}}},scales:{x:{grid:{color:GD},ticks:gc},y:{grid:{color:GD},ticks:{...gc,stepSize:1}}}}});
+
+// Demographics
+new Chart(document.getElementById("cDemo"),{type:"bar",data:{
+  labels:["35–44","45–54","25–34","55–64","65+","18–24"],
+  datasets:[{
+    label:"% of Audience",data:[40.3,22.5,19.2,11.2,3.5,2.8],
+    backgroundColor:["rgba(29,78,216,0.80)","rgba(29,78,216,0.65)","rgba(3,105,161,0.70)","rgba(3,105,161,0.55)","rgba(148,163,184,0.55)","rgba(148,163,184,0.45)"],
+    borderColor:["rgba(29,78,216,0.9)","rgba(29,78,216,0.85)","rgba(3,105,161,0.85)","rgba(3,105,161,0.75)","rgba(148,163,184,0.7)","rgba(148,163,184,0.65)"],
+    borderWidth:1.5,borderRadius:6
+  }]
+},options:{responsive:true,indexAxis:"y",plugins:{legend:{display:false}},scales:{x:{grid:{color:GD},ticks:{...gc,callback:v=>v+"%"}},y:{grid:{display:false},ticks:{color:"#334155",font:{size:11,weight:"700"}}}}}});
+
+// TIKC FB Historical
+new Chart(document.getElementById("cFBHist"),{type:"bar",data:{
+  labels:["Aug 24–30","Aug 31–Sep6","Sep 7–13","Sep 14–20","Sep 21–27","Sep 28–Oct4","Oct 5–11 ★"],
+  datasets:[{label:"FB Impressions",data:[1893,1278,1044,1058,1849,1895,2789],
+    backgroundColor:["rgba(29,78,216,0.55)","rgba(29,78,216,0.55)","rgba(29,78,216,0.55)","rgba(29,78,216,0.55)","rgba(29,78,216,0.55)","rgba(29,78,216,0.68)","rgba(29,78,216,0.88)"],
+    borderColor:"rgba(29,78,216,0.9)",borderWidth:1.5,borderRadius:7}]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:"#334155",font:{size:10,weight:"700"}}},y:{grid:{color:GD},ticks:gc}}}});
+
+// GCI Historical
+new Chart(document.getElementById("cGHist"),{type:"bar",data:{
+  labels:["Aug 24–30","Aug 31–Sep6","Sep 7–13","Sep 14–20 ★","Sep 21–27","Sep 28–Oct4","Oct 5–11"],
+  datasets:[
+    {label:"IG",data:[560,206,286,740,378,248,213],backgroundColor:GIG+"0.70)",borderColor:GIG+"0.9)",borderWidth:1.5,borderRadius:5},
+    {label:"FB",data:[20,16,11,73,60,55,17],backgroundColor:GFB+"0.65)",borderColor:GFB+"0.9)",borderWidth:1.5,borderRadius:5},
+    {label:"LI",data:[92,85,44,26,8,6,0],backgroundColor:"rgba(3,105,161,0.60)",borderColor:"rgba(3,105,161,0.85)",borderWidth:1.5,borderRadius:5}
+  ]},
+  options:{responsive:true,plugins:{legend:{labels:{color:"#334155",font:{size:11},boxWidth:10}}},
+    scales:{x:{stacked:true,grid:{display:false},ticks:{color:"#334155",font:{size:10,weight:"700"}}},y:{stacked:true,grid:{color:GD},ticks:gc}}}});
+</script>
+</body>
+</html>
